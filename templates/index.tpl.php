@@ -17,18 +17,29 @@
 	</header>
     <div id="wrapper">
         <aside id="nav">
-            <nav>
-                <ul>
-					<?php foreach ($oldalak as $url => $oldal) { ?>
-						<?php if(! isset($_SESSION['login']) && $oldal['menun'][0] || isset($_SESSION['login']) && $oldal['menun'][1]) { ?>
-							<li<?= (($oldal == $keres) ? ' class="active"' : '') ?>>
-							<a href="<?= ($url == '/') ? '.' : $url ?>">
-							<?= $oldal['szoveg'] ?></a>
-							</li>
-						<?php } ?>
-					<?php } ?>
-                </ul>
-            </nav>
+				<nav class="menu">
+<?php foreach ($oldalak as $url => $oldal): ?>
+
+    <?php
+    $lathato = false;
+
+    if (!isset($_SESSION['login']) && $oldal['menun'][0] == 1) {
+        $lathato = true;
+    }
+
+    if (isset($_SESSION['login']) && $oldal['menun'][1] == 1) {
+        $lathato = true;
+    }
+    ?>
+
+    <?php if ($lathato): ?>
+        <a href="?<?php echo $url; ?>">
+            <?php echo $oldal['szoveg']; ?>
+        </a>
+    <?php endif; ?>
+
+<?php endforeach; ?>
+</nav>
         </aside>
         <div id="content">
             <?php include("./templates/pages/{$keres['fajl']}.tpl.php"); ?>
