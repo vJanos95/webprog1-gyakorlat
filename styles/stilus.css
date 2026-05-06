@@ -1,141 +1,149 @@
+/* --- Teljes Alaphelyzetbe állítás --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #0b0b0b;
+    color: #eee;
+}
+
+/* --- Header --- */
 header {
     border-radius: 10px;
-    background: linear-gradient(90deg, #c00000, #1a1a1a);
+    background: linear-gradient(90deg, #c00000 0%, #1a1a1a 100%);
     color: white;
-    padding: 10px;
+    padding: 20px;
     margin: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid #ffcc00;
 }
 
 header img {
-    float: left;
-    margin: 20px 10px 0px 10px;
+    max-width: 70px;
+    height: auto;
+    margin-right: 20px;
 }
 
+/* --- Wrapper --- */
 div#wrapper {
-    margin: 10px;
+    margin: 0 10px;
+    display: block; /* Visszaállítva block-ra a stabilitásért */
 }
 
-/* ===== ASIDE MARAD ===== */
+/* --- NAVIGÁCIÓ - Itt a lényeg! --- */
 aside {
-    display: table-cell;
-    vertical-align: top;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-/* ===== NAV (MENÜ MARAD UGYANAZ STRUKTÚRA) ===== */
 nav {
-    margin: 0px 10px 0px 0px;
-    top: 0px;
     border-radius: 10px;
-    background-color: #1a1a1a; /* F1 sötét */
-    border: 1px solid #c00000;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    width: 100%;
+    display: block;
 }
 
 nav ul {
-    list-style-type: none;
-    margin: 0px;
-    padding: 15px 0px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;        /* Flexbox bekapcsolása */
+    flex-direction: row;  /* Kényszerített vízszintes irány */
+    flex-wrap: nowrap;    /* Tilos az új sorba törés desktopon */
+    width: 100%;
 }
 
 nav ul li {
-    padding: 0px 15px;
+    display: block;       /* Megszüntetjük a lista-elem jelleget */
+    flex: 0 1 auto;       /* Csak annyi helyet foglal, amennyi a szövegnek kell */
 }
 
-nav ul li.active {
-    border-right: 5px solid #ffcc00;
-}
-
-/* linkek */
 nav ul a {
+    display: block;
+    padding: 15px 25px;
     text-decoration: none;
     color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    white-space: nowrap;  /* Tilos a szavakat széttörni */
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Aktív és Hover állapot */
+nav ul li.active a {
+    background-color: #222;
+    color: #ffcc00;
+    border-bottom: 4px solid #ffcc00;
 }
 
 nav ul a:hover {
-    color: #ff0000;
+    background-color: #c00000;
+    color: white;
 }
 
-/* ===== CONTENT ===== */
+/* --- TARTALOM --- */
 div#content {
-    display: table-cell;
-    width: 100%;
-    border-radius: 10px;
     background-color: #111;
-    color: white;
-    padding: 15px;
+    border-radius: 10px;
+    padding: 25px;
+    min-height: 450px;
+    border: 1px solid #222;
+    clear: both; /* Biztosítja, hogy semmi ne csússzon rá */
 }
 
 div#content img {
     float: right;
-    width: 20em;
+    max-width: 300px;
+    width: 100%;
     height: auto;
-    margin: 0 0 15px 15px;
-    padding: 3px;
+    margin: 0 0 20px 20px;
     border: 2px solid #c00000;
+    border-radius: 8px;
 }
 
-/* ===== FOOTER ===== */
+/* --- Footer --- */
 footer {
     border-radius: 10px;
-    margin: 10px;
-    padding: 5px 20px;
+    margin: 20px 10px 10px 10px;
+    padding: 15px;
     background-color: #1a1a1a;
-    color: white;
-    border-top: 2px solid #c00000;
+    color: #888;
+    text-align: center;
+    border-top: 1px solid #333;
 }
 
-/* ===== MENU FLEX (HA HASZNÁLOD) ===== */
-.menu {
-    display: flex;
-    gap: 10px;
-    background: #222;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.menu a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 12px;
-    background: #333;
-    border-radius: 5px;
-}
-
-.menu a:hover {
-    background: #c00000;
-}
-
-/* ===== RESZPONZÍV ===== */
+/* --- Mobil Reszponzivitás --- */
 @media screen and (max-width: 768px) {
-
-    #wrapper {
-        display: block;
+    nav ul {
+        flex-wrap: wrap; /* Mobilon engedjük az egymás alá kerülést */
     }
 
-    aside {
-        display: block;
-        width: 100%;
+    nav ul li {
+        flex: 1 0 50%; /* Mobilon két oszlopos lesz a menü */
     }
 
-    div#content {
+    nav ul a {
+        text-align: center;
+        padding: 10px;
+        border-bottom: 1px solid #333;
+    }
+
+    div#content img {
+        float: none;
         display: block;
-        margin-top: 10px;
+        margin: 0 auto 20px auto;
     }
 }
 
 @media screen and (max-width: 480px) {
-
-    div#content {
-        padding: 10px;
+    nav ul li {
+        flex: 1 0 100%; /* Kicsi mobilon egy oszlopos menü */
     }
-}
-
-/* ===== KÉPFELTÖTÉS ===== */
-img {
-    border-radius: 8px;
-    transition: 0.3s;
-}
-
-img:hover {
-    transform: scale(1.05);
-    border-color: #ff0000;
 }

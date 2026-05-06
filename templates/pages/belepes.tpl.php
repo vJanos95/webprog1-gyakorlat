@@ -1,4 +1,9 @@
-    <form action = "belep" method = "post">
+<?php if(isset($uzenet)) { ?>
+  <div style="color:red; font-weight:bold;"><?= $uzenet ?></div>
+  <?php } ?>
+
+
+    <form action="index.php?oldal=belepes" method="post">
       <fieldset>
         <legend>Bejlentkezés</legend>
         <br>
@@ -9,7 +14,7 @@
       </fieldset>
     </form>
     <h3>Regisztrálja magát, ha még nem felhasználó!</h2>
-    <form action = "regisztral" method = "post">
+    <form action="index.php?oldal=regisztral" method="post">
       <fieldset>
         <legend>Regisztráció</legend>
         <br>
